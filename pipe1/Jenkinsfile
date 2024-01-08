@@ -4,6 +4,18 @@ pipeline {
 
   stages {
 
-    steps {
+    stage (build) {
+      steps {
+        sh 'printenv'
+        sh 'docker build -t dazarate1970/web1
+      }
+
+    }
+
+  }
+
+}
+
+}
 
       
