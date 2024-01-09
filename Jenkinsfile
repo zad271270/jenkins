@@ -7,7 +7,7 @@ pipeline {
     stage (build) {
       steps {
         sh 'printenv'
-        sh 'docker build -t dazarate1970/web1'
+        sh 'docker build -t dazarate1970/web1 -f Dockerfile .'
       }
 
     }
