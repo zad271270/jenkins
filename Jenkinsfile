@@ -4,10 +4,16 @@ pipeline {
 
   stages {
 
+    stage(clone repo) {
+      /* Let's make sure we have the repository cloned to our workspace */
+
+        checkout scm
+    }
+
     stage (build) {
       steps {
-        sh 'printenv'
-        sh 'docker build -t dazarate1970/web1'
+        
+        app = docker.build("dazarate1970/web1")
       }
 
     }
