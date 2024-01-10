@@ -5,7 +5,7 @@ pipeline {
         stage('checkout & build') {
             steps {
                 sh 'printenv'
-                sh 'docker build -t dazarate1970/web -f Dockerfile .'
+                sh 'docker build -t $DOCKER_USER/web -f Dockerfile .'
             }
         }
         
