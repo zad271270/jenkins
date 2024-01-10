@@ -4,9 +4,9 @@ pipeline {
     stages {
         stage('checkout & build') {
             steps {
-                withCredentials([string(credentialsId: 'DOCKER_USER', variable: 'DOCKER_USER'), string(credentialsId: 'DOCKER_PASSWD', variable: 'DOCKER_PASSWD')]) {
+                withCredentials([string(credentialsId: 'DOCKER_USER', variable: 'DOCKER_USER')]) {
                 sh 'printenv'
-                sh 'docker build -t dazarate1970/web:latest -f Dockerfile .'
+                sh 'docker build -t $DOCKER_USER/web:latest -f Dockerfile .'
                 }
             } 
         }
