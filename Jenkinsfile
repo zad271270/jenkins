@@ -4,9 +4,11 @@ pipeline {
     stages {
         stage('checkout & build') {
             steps {
+                withCredentials([string(credentialsId: 'DOCKER_USER', variable: 'DOCKER_USER'), string(credentialsId: 'DOCKER_PASSWD', variable: 'DOCKER_PASSWD')]) {
                 sh 'printenv'
                 sh 'docker build -t dazarate1970/web:latest -f Dockerfile .'
-            }
+                }
+            } 
         }
         
         stage('push to docker hub') {
