@@ -21,7 +21,12 @@ pipeline {
             steps {
                 script {
                     withSonarQubeEnv(credentialsId: 'sonar-token') {
-                        sh "sonar-scanner   -Dsonar.projectKey=jenkins   -Dsonar.sources=.   -Dsonar.host.url=http://192.168.100.61:9000"
+
+                        sh "sonar-scanner \
+                        -Dsonar.projectKey=pipe \
+                        -Dsonar.sources=. \
+                        -Dsonar.host.url=http://192.168.100.61:9000 \
+                        -Dsonar.token=sqp_4ce8103d1108b47aa26529d9698fa4f878f6858c"
                     }
                 }
             }
