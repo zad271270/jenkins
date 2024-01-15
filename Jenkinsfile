@@ -24,7 +24,7 @@ pipeline {
                 script {
                     withSonarQubeEnv(credentialsId: 'sonar-token') {
 
-                        sh "sonar-scanner \
+                        sh "sudo sonar-scanner \
                         -Dsonar.projectKey=pipe \
                         -Dsonar.sources=. \
                         -Dsonar.host.url=http://192.168.100.61:9000 \
