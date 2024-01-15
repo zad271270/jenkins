@@ -2,7 +2,21 @@ pipeline {
     agent any
 
     stages {
-        stage('checkout & build') {
+        
+        stage('CleanUp Workspace') {
+            steps {
+                cleanWs()
+            }
+            
+        }
+        
+        stage('Checkout from SCM') {
+            steps {
+                
+                git branch: 'main', credentialsId: 'github', url: 'https://github.com/zad271270/jenkins'
+            }
+        }
+        stage('Docker checkout & build') {
             steps {
                 withCredentials([string(credentialsId: 'DOCKER_USER', variable: 'DOCKER_USER')]) {
                 sh 'printenv'
@@ -11,7 +25,7 @@ pipeline {
             } 
         }
         
-        stage('push to docker hub') {
+        stage('Push to docker hub') {
             
             steps {
                 withCredentials([string(credentialsId: 'DOCKER_USER', variable: 'DOCKER_USER'), string(credentialsId: 'DOCKER_PASSWD', variable: 'DOCKER_PASSWD')]) {
