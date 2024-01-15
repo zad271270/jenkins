@@ -16,6 +16,26 @@ pipeline {
                 git branch: 'main', credentialsId: 'github', url: 'https://github.com/zad271270/jenkins'
             }
         }
+
+                stage("Sonarqube Analysis") {
+            steps {
+                script {
+                    withSonarQubeEnv(credentialsId: 'sonar-token') {
+                        sh "mvn sonar:sonar"
+                    }
+                }
+            }
+
+        }
+
+        stage("Quality Gate") {
+            steps {
+                script {
+                    waitForQualityGate abortPipeline: false, credentialsId: 'sonar-token'
+                }
+            }
+
+        }
         stage('Docker checkout & build') {
             steps {
                 withCredentials([string(credentialsId: 'DOCKER_USER', variable: 'DOCKER_USER')]) {
